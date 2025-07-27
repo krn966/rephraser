@@ -2,10 +2,12 @@ import express from 'express';
 import fetch from 'node-fetch';
 import { marked } from 'marked';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
+app.use(cors({ origin: '*' })); // Allow all origins for development
 app.use(express.json());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -50,6 +52,7 @@ app.post('/rephrase', async (req, res) => {
     console.log('Gemini API response:', JSON.stringify(geminiData, null, 2));
     
     const rephrasedText = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text || 'Error: No result from Gemini API.';
+    console.log('Gemini API response:', geminiData);
     console.log('Extracted rephrased text:', rephrasedText);
     
     // Format the output as HTML using marked (React Markdown compatible)
