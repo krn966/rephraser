@@ -1,7 +1,9 @@
-const express = require('express');
-const fetch = require('node-fetch');
-const { marked } = require('marked');
-require('dotenv').config();
+import express from 'express';
+import fetch from 'node-fetch';
+import { marked } from 'marked';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
